@@ -135,6 +135,59 @@ feature -- Write model to file
 			"write_lp"
 		end
 
+	lp_write_mps (lp: POINTER; filename: POINTER): INTEGER_8
+		-- Write an mps model.
+		require
+			lp_not_null: lp /= default_pointer
+			filename_not_null: filename /= default_pointer
+		external
+			"C (lprec *, char *): unsigned char | %"lp_lib.h%""
+ 		alias
+			"write_mps"
+		end
+
+	lp_write_XLI (lp: POINTER; filename: POINTER; options: POINTER; results: INTEGER_8): INTEGER_8
+		-- Write a model to a file via the External Language Interface.
+		require
+			lp_not_null: lp /= default_pointer
+			filename_not_null: filename /= default_pointer
+		external
+			"C (lprec *, char *, char *, unsigned char): unsigned char | %"lp_lib.h%""
+ 		alias
+			"write_XLI"
+		end
+
+	lp_set_XLI (lp: POINTER; filename: POINTER): INTEGER_8
+		-- Set External Language Interfaces package.
+		require
+			lp_not_null: lp /= default_pointer
+			filename_not_null: filename /= default_pointer
+		external
+			"C (lprec *, char *): unsigned char | %"lp_lib.h%""
+ 		alias
+			"set_XLI"
+		end
+
+	lp_has_XLI (lp: POINTER): INTEGER_8
+		-- Returns if there is an external language interface (XLI) set.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): unsigned char | %"lp_lib.h%""
+ 		alias
+			"has_XLI"
+		end
+
+	lp_is_nativeXLI (lp: POINTER): INTEGER_8
+		-- Returns if a build-in External Language Interfaces (XLI) is available or not.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): unsigned char | %"lp_lib.h%""
+ 		alias
+			"is_nativeXLI"
+		end
+
 feature -- Debug/Print settings
 
 	lp_set_outputfile (lp: POINTER; filename: POINTER): INTEGER_8
@@ -146,6 +199,116 @@ feature -- Debug/Print settings
 			"C (lprec *, char *): unsigned char | %"lp_lib.h%""
  		alias
 			"set_outputfile"
+		end
+
+	lp_set_debug (lp: POINTER; deb: INTEGER_8)
+		-- Sets a flag if all intermediate results and the branch-and-bound decisions must be printed while solving.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *, unsigned char) | %"lp_lib.h%""
+ 		alias
+			"set_debug"
+		end
+
+	lp_is_debug (lp: POINTER): INTEGER_8
+		-- Returns a flag if all intermediate results and the branch-and-bound decisions must be printed while solving.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): unsigned char | %"lp_lib.h%""
+ 		alias
+			"is_debug"
+		end
+
+	lp_set_lag_trace (lp: POINTER; lag_trace: INTEGER_8)
+		-- Sets a flag if Lagrangian progression must be printed while solving.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *, unsigned char) | %"lp_lib.h%""
+ 		alias
+			"set_lag_trace"
+		end
+
+	lp_is_lag_trace (lp: POINTER): INTEGER_8
+		-- Returns a flag if Lagrangian progression must be printed while solving.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): unsigned char | %"lp_lib.h%""
+ 		alias
+			"is_lag_trace"
+		end
+
+	lp_set_print_sol (lp: POINTER; print_sol: INTEGER)
+		-- Sets a flag if all intermediate valid solutions must be printed while solving.
+		-- FALSE (0) No printing
+		-- TRUE (1) Print all values
+		-- AUTOMATIC (2) Print only non-zero values
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *, int) | %"lp_lib.h%""
+ 		alias
+			"set_print_sol"
+		end
+
+	lp_get_print_sol (lp: POINTER): INTEGER
+		-- Returns a flag if all intermediate valid solutions must be printed while solving.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): int | %"lp_lib.h%""
+ 		alias
+			"get_print_sol"
+		end
+
+	lp_set_trace (lp: POINTER; trace: INTEGER_8)
+		-- Sets a flag if pivot selection must be printed while solving.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *, unsigned char) | %"lp_lib.h%""
+ 		alias
+			"set_trace"
+		end
+
+	lp_is_trace (lp: POINTER): INTEGER_8
+		-- Returns a flag if pivot selection must be printed while solving.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): unsigned char | %"lp_lib.h%""
+ 		alias
+			"is_trace"
+		end
+
+	lp_set_verbose (lp: POINTER; verbose: INTEGER)
+		-- Set the verbose level.
+		-- NEUTRAL (0) Only some specific debug messages in de debug print routines are reported.
+		-- CRITICAL (1) Only critical messages are reported. Hard errors like instability, out of memory, ...
+		-- SEVERE (2) Only severe messages are reported. Errors.
+		-- IMPORTANT (3) Only important messages are reported. Warnings and Errors.
+		-- NORMAL (4) Normal messages are reported. This is the default.
+		-- DETAILED (5) Detailed messages are reported. Like model size, continuing B&B improvements, ...
+		-- FULL (6) All messages are reported. Useful for debugging purposes and small models.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *, int) | %"lp_lib.h%""
+ 		alias
+			"set_verbose"
+		end
+
+	lp_get_verbose (lp: POINTER): INTEGER
+		-- Returns the verbose level.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): int | %"lp_lib.h%""
+ 		alias
+			"get_verbose"
 		end
 
 feature -- Debug/Print
@@ -188,6 +351,46 @@ feature -- Debug/Print
 			"C (lprec *, int) | %"lp_lib.h%""
  		alias
 			"print_constraints"
+		end
+
+	lp_print_debugdump (lp: POINTER; filename: POINTER): INTEGER_8
+		-- Do a generic readable data dump of key lp_solve model variables; principally for run difference and debugging purposes.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *, char *): unsigned char | %"lp_lib.h%""
+ 		alias
+			"print_debugdump"
+		end
+
+	lp_print_duals (lp: POINTER)
+		-- Prints the values of the duals of the lp.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *) | %"lp_lib.h%""
+ 		alias
+			"print_duals"
+		end
+
+	lp_print_scales (lp: POINTER)
+		-- Prints the scales of the lp.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *) | %"lp_lib.h%""
+ 		alias
+			"print_scales"
+		end
+
+	lp_print_tableau (lp: POINTER)
+		-- Prints the tableau.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *) | %"lp_lib.h%""
+ 		alias
+			"print_tableau"
 		end
 
 feature -- Build model
@@ -1666,6 +1869,76 @@ feature -- Solution
 			"get_primal_solution"
 		end
 
+	lp_get_sensitivity_obj (lp: POINTER; objfrom: POINTER; objtill: POINTER): INTEGER_8
+		-- Returns the sensitivity of the objective function.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *, REAL *, REAL *): unsigned char | %"lp_lib.h%""
+ 		alias
+			"get_sensitivity_obj"
+		end
+
+	lp_get_sensitivity_rhs (lp: POINTER; duals: POINTER; dualsfrom: POINTER; dualstill: POINTER): INTEGER_8
+		-- Returns the sensitivity of the constraints and the variables.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *, REAL *, REAL *, REAL *): unsigned char | %"lp_lib.h%""
+ 		alias
+			"get_sensitivity_rhs"
+		end
+
+	lp_get_solutioncount (lp: POINTER): INTEGER
+		-- Returns the number of equal solutions.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): int | %"lp_lib.h%""
+ 		alias
+			"get_solutioncount"
+		end
+
+	lp_get_total_iter (lp: POINTER): INTEGER_64
+		-- Returns the total number of iterations.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): long long | %"lp_lib.h%""
+ 		alias
+			"get_total_iter"
+		end
+
+	lp_get_total_nodes (lp: POINTER): INTEGER_64
+		-- Returns the total number of nodes processed in branch-and-bound.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): long long | %"lp_lib.h%""
+ 		alias
+			"get_total_nodes"
+		end
+
+	lp_get_working_objective (lp: POINTER): REAL_64
+		-- Returns the value of the objective function.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): REAL | %"lp_lib.h%""
+ 		alias
+			"get_working_objective"
+		end
+
+	lp_is_feasible (lp: POINTER; values: POINTER; threshold: REAL_64): INTEGER_8
+		-- Checks if provided solution is a feasible solution.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *, REAL *, REAL): unsigned char | %"lp_lib.h%""
+ 		alias
+			"is_feasible"
+		end
+
 feature -- Miscellaneous
 
 	lp_time_elapsed (lp: POINTER): REAL_64
@@ -1706,6 +1979,84 @@ feature -- Miscellaneous
 			"C (lprec *): int | %"lp_lib.h%""
  		alias
 			"get_status"
+		end
+
+	lp_dualize_lp (lp: POINTER): INTEGER_8
+		-- Create the dual of the current model.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): unsigned char | %"lp_lib.h%""
+ 		alias
+			"dualize_lp"
+		end
+
+	lp_get_lp_index (lp: POINTER; orig_index: INTEGER): INTEGER_8
+		-- Returns the index in the lp of the original row/column.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *, int): unsigned char | %"lp_lib.h%""
+ 		alias
+			"get_lp_index"
+		end
+
+	lp_get_nonzeros (lp: POINTER): INTEGER
+		-- Returns the number of non-zero elements in the matrix.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): int | %"lp_lib.h%""
+ 		alias
+			"get_nonzeros"
+		end
+
+	lp_get_Norig_columns (lp: POINTER): INTEGER
+		-- Returns the number of original columns (variables) in the lp.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): int | %"lp_lib.h%""
+ 		alias
+			"get_Norig_columns"
+		end
+
+	lp_get_Norig_rows (lp: POINTER): INTEGER
+		-- Returns the number of original rows (constraints) in the lp.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *): int | %"lp_lib.h%""
+ 		alias
+			"get_Norig_rows"
+		end
+
+	lp_get_orig_index (lp: POINTER; lp_index: INTEGER): INTEGER
+		-- Returns the original row/column where a constraint/variable was before presolve.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *, int): int | %"lp_lib.h%""
+ 		alias
+			"get_orig_index"
+		end
+
+	lp_get_statustext (lp: POINTER; statuscode: INTEGER): POINTER
+		-- Returns the description of a returncode of the solve function.
+		require
+			lp_not_null: lp /= default_pointer
+		external
+			"C (lprec *, int): char * | %"lp_lib.h%""
+ 		alias
+			"get_statustext"
+		end
+
+	lp_lp_solve_version (majorversion: POINTER; minorversion: POINTER; release: POINTER; build: POINTER)
+		-- Returns the description of a returncode of the solve function.
+		external
+			"C (int *, int *, int *, int *) | %"lp_lib.h%""
+ 		alias
+			"lp_solve_version"
 		end
 
 feature -- Callback routines
