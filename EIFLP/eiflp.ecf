@@ -9,6 +9,7 @@
 		<external_object location="&quot;C:\Users\thinkpad\Documents\Eiffel 6.8 User Files\projects\EIFLP\EIFLP\lpsolve_lib\lpsolve55.lib&quot;"/>
 		<precompile name="base_pre" location="$ISE_PRECOMP\base.ecf"/>
 		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf"/>
+		<library name="testing_library" location="$ISE_LIBRARY\library\testing\testing.ecf"/>
 		<cluster name="eiflp" location=".\" recursive="true">
 			<file_rule>
 				<exclude>/EIFGENs$</exclude>
@@ -21,8 +22,12 @@
 			<file_rule>
 				<exclude>^/testing$</exclude>
 			</file_rule>
+			<file_rule>
+				<exclude>^/tests$</exclude>
+			</file_rule>
 			<cluster name="library" location="c:\users\thinkpad\documents\eiffel 6.8 user files\projects\eiflp\eiflp\library\"/>
 			<cluster name="testing" location="c:\users\thinkpad\documents\eiffel 6.8 user files\projects\eiflp\eiflp\testing\"/>
+			<cluster name="tests" location="c:\users\thinkpad\documents\eiffel 6.8 user files\projects\eiflp\eiflp\tests\"/>
 		</cluster>
 	</target>
 	<target name="eiflp_dotnet" extends="eiflp">
