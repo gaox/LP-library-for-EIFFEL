@@ -5,7 +5,7 @@ Version 0.1
 - Export almost all the c api of lp_solve library.
 - MODEL and SOLUTION class is used for the ease of cache.
 - For time measure, time_enlapsed function can be called.
-- APLICATION class contains some simple tests.
+- APPLICATION class contains some simple tests.
 - Project setting is set to void safety.
 
 - Bonus: An simplex algorithm implemented from scratch in Eiffel.
