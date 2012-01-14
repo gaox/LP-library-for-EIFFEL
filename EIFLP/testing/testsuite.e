@@ -23,10 +23,13 @@ feature -- Run the tests
 		local
 			test: TEST
 		do
-			test := create {CACHETEST}.make
+			test := create {CACHE_TEST}.make
 			test.run
 
-			test := create {SOLVETEST}.make
+			test := create {SOLVE_TEST}.make
+			test.run
+
+			test := create {SIMPLEX_TEST}.make
 			test.run
 		end
 end

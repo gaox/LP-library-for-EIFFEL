@@ -5,7 +5,7 @@ note
 	revision: "$Revision$"
 
 class
-	CACHETEST
+	CACHE_TEST
 
 inherit
 	TEST
@@ -24,6 +24,7 @@ feature -- Test
 
 	run
 		-- Run the cache test.
+		-- I know it is not a good one.
 		local
 			-- LP library
 			lib: LPLIB
@@ -38,7 +39,7 @@ feature -- Test
 			model2: MODEL
 			model3: MODEL
 		do
-			io.put_string ("-----Start running cachetest%N")
+			io.put_string ("-----Start running cache test%N")
 			create lib.make
 			create filename.make ("testcase\1.lp")
 			create modelname.make ("1.model")
@@ -47,7 +48,7 @@ feature -- Test
 			create model1.make (lp1, lib)
 			create model2.make (lp2, lib)
 			model1.solve (lp1, lib)
-			
+
 			lib.insert_to_cache (model1)
 			if lib.search_cache (model2) /= Void then
 				io.put_string ("Hit cache!%N")
@@ -64,7 +65,7 @@ feature -- Test
 			else
 				io.put_string ("Miss cache%N")
 			end
-			io.put_string ("*****Finish cachetest%N")
+			io.put_string ("*****Finish cache test%N")
 			io.new_line
 
 			lib.lp_delete_lp (lp1)

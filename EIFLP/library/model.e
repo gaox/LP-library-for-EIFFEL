@@ -79,6 +79,7 @@ feature {NONE}  -- Initialization
 				is_binary.put (lib.lp_is_binary (lp, i), i)
 				i := i + 1
 			end
+			create sol.make (lp, lib)
 		end
 
 feature -- Solve
@@ -263,6 +264,9 @@ feature -- Access
 	rh: ARRAY[REAL_64]
 
 	-- Constraint type
+	-- LE (1) Less than or equal (<=)
+	-- EQ (3) Equal (=)
+	-- GE (2) Greater than or equal (>=)
 	const_type: ARRAY[INTEGER]
 
 	-- Is objective maximization?

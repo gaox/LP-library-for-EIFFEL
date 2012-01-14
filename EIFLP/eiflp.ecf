@@ -2,14 +2,14 @@
 <system xmlns="http://www.eiffel.com/developers/xml/configuration-1-8-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-8-0 http://www.eiffel.com/developers/xml/configuration-1-8-0.xsd" name="eiflp" uuid="67FD660C-F1B8-429D-B7A9-65CCDFC185F8">
 	<target name="eiflp">
 		<root class="APPLICATION" feature="execute"/>
-		<option warning="true">
+		<option warning="true" full_class_checking="true" is_attached_by_default="true" void_safety="all">
 			<assertions precondition="true" postcondition="true" check="true" invariant="true" loop="true" supplier_precondition="true"/>
 		</option>
 		<external_include location="&quot;C:\Users\thinkpad\Documents\Eiffel 6.8 User Files\projects\EIFLP\EIFLP\lpsolve_lib&quot;"/>
 		<external_object location="&quot;C:\Users\thinkpad\Documents\Eiffel 6.8 User Files\projects\EIFLP\EIFLP\lpsolve_lib\lpsolve55.lib&quot;"/>
-		<precompile name="base_pre" location="$ISE_PRECOMP\base.ecf"/>
-		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf"/>
-		<library name="testing_library" location="$ISE_LIBRARY\library\testing\testing.ecf"/>
+		<precompile name="base-safe_precompile" location="D:\Program\Eiffel\precomp\spec\windows\base-safe.ecf"/>
+		<library name="base" location="$ISE_LIBRARY\library\base\base-safe.ecf"/>
+		<library name="test" location="$ISE_LIBRARY\library\testing\testing-safe.ecf"/>
 		<cluster name="eiflp" location=".\" recursive="true">
 			<file_rule>
 				<exclude>/EIFGENs$</exclude>

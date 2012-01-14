@@ -5,7 +5,7 @@ note
 	revision: "$Revision$"
 
 class
-	SOLVETEST
+	SOLVE_TEST
 
 inherit
 	TEST
@@ -34,7 +34,7 @@ feature -- Test
 			modelname: C_STRING
 			model: MODEL
 		do
-			io.put_string ("-----Start running solvetest%N")
+			io.put_string ("-----Start running solve test%N")
 			create lib.make
 			create filename.make ("testcase\1.lp")
 			create modelname.make ("1.model")
@@ -44,8 +44,8 @@ feature -- Test
 			model.print_obj
 			model.print_const
 			model.print_sol
-			io.put_string ("*****Finish solvetest%N")
-
+			io.put_string ("*****Finish solve test%N")
+			io.new_line
 			lib.lp_delete_lp (lp)
 		end
 end

@@ -4,6 +4,8 @@ note
 	date: "$Date$"
 	revision: "$Revision$"
 
+-- This is horrible.
+
 class
 	LPLIB
 
@@ -25,7 +27,7 @@ feature -- Cache
 	-- Cache at most 10 models
 	cache_size: INTEGER = 10
 
-	search_cache (model: MODEL): MODEL
+	search_cache (model: MODEL): detachable MODEL
 		-- Return the model if found, otherwise return void.
 		do
 			Result := Void
