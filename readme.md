@@ -1,7 +1,7 @@
 EIFLP - An Eiffel library for linear programming.
-
+--------
 Version 0.1
-
+--------
 - Export almost all the c api of lp_solve library.
 - MODEL and SOLUTION class is used for the ease of cache.
 - For time measure, time_enlapsed function can be called.
